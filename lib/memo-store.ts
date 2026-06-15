@@ -7,7 +7,7 @@ const STORAGE_KEY = "flash-memos"
 
 export function extractTags(content: string): string[] {
   const matches = content.matchAll(/#([^\s#]+)/g)
-  return [...new Set([...matches].map((m) => m[1]))]
+  return [...new Set([...matches].map((match) => match[1]))]
 }
 
 export function loadMemos(): Memo[] {
@@ -67,7 +67,9 @@ export function filterMemos(
       }
       if (!query) return true
       const inContent = memo.content.toLowerCase().includes(query)
-      const inTags = memo.tags.some((t) => t.toLowerCase().includes(query))
+      const inTags = memo.tags.some((tag) =>
+        tag.toLowerCase().includes(query)
+      )
       return inContent || inTags
     })
     .sort(
@@ -77,7 +79,7 @@ export function filterMemos(
 }
 
 export function getMemoDates(memos: Memo[]): Date[] {
-  return memos.map((m) => parseISO(m.createdAt))
+  return memos.map((memo) => parseISO(memo.createdAt))
 }
 
 export function formatMemoTime(iso: string): string {
@@ -96,22 +98,22 @@ function getSampleMemos(): Memo[] {
   return [
     {
       id: "sample-1",
-      content: "闪念备忘录 MVP 开工！记录每一个灵感瞬间 #灵感 #项目",
-      tags: ["灵感", "项目"],
+      content: "晨跑 5 公里，最后一公里没有降速。状态比想象中更好。#训练 #跑步",
+      tags: ["训练", "跑步"],
       createdAt: today.toISOString(),
       updatedAt: today.toISOString(),
     },
     {
       id: "sample-2",
-      content: "参考 Memos 的时间线体验：打开即写，写完即走。#设计",
-      tags: ["设计"],
+      content: "别急着追求完美，先把今天脑子里最亮的那个点子记下来。#灵感",
+      tags: ["灵感"],
       createdAt: today.toISOString(),
       updatedAt: today.toISOString(),
     },
     {
       id: "sample-3",
-      content: "昨天记下的待办：整理标签体系，优化日历视图。#待办",
-      tags: ["待办"],
+      content: "明天：深蹲加一组，整理课程笔记，晚上早点睡。#计划 #恢复",
+      tags: ["计划", "恢复"],
       createdAt: yesterday.toISOString(),
       updatedAt: yesterday.toISOString(),
     },

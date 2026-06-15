@@ -4,8 +4,8 @@ import { Toaster } from "@/components/ui/sonner"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "闪念备忘录",
-  description: "个人闪念备忘录 MVP — 快速输入、标签、日历视图与全文搜索",
+  title: "闪念训练场",
+  description: "记录灵感、训练状态与每一个值得留下的瞬间。",
 }
 
 export default function RootLayout({
@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN" className="h-full antialiased">
-      <body className="flex min-h-full flex-col">
+      <body className="min-h-full">
         {children}
         <Toaster position="top-center" richColors />
       </body>
